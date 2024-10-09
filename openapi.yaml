@@ -1,0 +1,40 @@
+openapi: 3.1.0
+info:
+  title: Star Wars API
+  version: 1.0.0
+paths:
+  /characters:
+    get:
+      summary: Get a list of characters
+      responses:
+        '200':
+          description: A JSON array of character names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /characters/{id}:
+    get:
+      summary: Get a character by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A character object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string

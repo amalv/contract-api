@@ -36,10 +36,11 @@ This project showcases the use of a contract API to allow parallel backend and f
    bun run dev
    ```
 
-This project sets up a simple Star Wars API using OpenAPI and showcases how to query it using Apollo Client in a React application. The API is mocked using MSW to facilitate parallel development.
+4. Open your browser and navigate to `http://localhost:3000/api-docs` to view the Swagger UI.
 
-### Example API
-The Star Wars API includes endpoints for retrieving lists of characters and their details. This project serves as an example of how to implement and use contract APIs effectively.
+## Swagger UI
+Swagger UI provides a visual interface to interact with the API defined in the `openapi.yaml` file. It allows you to test endpoints and view request/response schemas.
+
 
 ## Release Process
 
