@@ -3,9 +3,9 @@ info:
   title: Star Wars API
   version: 1.0.0
 paths:
-  /characters:
+  /people:
     get:
-      summary: Get a list of characters
+      summary: Get a list of people
       responses:
         '200':
           description: A JSON array of character names
@@ -15,9 +15,9 @@ paths:
                 type: array
                 items:
                   type: string
-  /characters/{id}:
+  /people/{id}:
     get:
-      summary: Get a character by ID
+      summary: Get a person by ID
       parameters:
         - in: path
           name: id

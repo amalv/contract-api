@@ -31,16 +31,36 @@ This project showcases the use of a contract API to allow parallel backend and f
    bun install
    ```
 
-3. Run the development server:
+3. Run the Swagger documentation server:
    ```bash
-   bun run dev
+   bun run swagger 
    ```
 
 4. Open your browser and navigate to `http://localhost:3000/api-docs` to view the Swagger UI.
 
+5. Run the development server:
+   ```sh
+   bun run dev
+   ```
+
+6. See console output overriding API call:
+
+```sh
+[ 'Luke Skywalker', 'Darth Vader', 'Leia Organa' ]
+{ id: '1', name: 'Luke Skywalker', description: 'A Jedi Knight' }
+```
+
 ## Swagger UI
 Swagger UI provides a visual interface to interact with the API defined in the `openapi.yaml` file. It allows you to test endpoints and view request/response schemas.
 
+## MSW Setup
+
+### Handlers
+
+Mock Service Worker (MSW) is used to mock API requests during development. The mock server is set up in src/mocks/node.ts and the browser worker is set up in src/mocks/browser.ts.
+
+### Node.js Setup
+In a Node.js environment, the mock server is configured and started in src/index.ts:
 
 ## Release Process
 
