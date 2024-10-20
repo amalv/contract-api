@@ -57,10 +57,60 @@ Swagger UI provides a visual interface to interact with the API defined in the `
 
 ### Handlers
 
-Mock Service Worker (MSW) is used to mock API requests during development. The mock server is set up in src/mocks/node.ts and the browser worker is set up in src/mocks/browser.ts.
+The MSW handlers are defined in `src/mocks/handlers.ts` to mock the `/people` and `/people/{id}` endpoints.
 
-### Node.js Setup
-In a Node.js environment, the mock server is configured and started in src/index.ts:
+```ts
+import { http, HttpResponse } from "msw";
+
+type CharacterParams = {
+  id: string;
+};
+
+type CharacterListResponse = string[];
+
+type CharacterResponse = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+export const handlers = [
+  http.get<never, never, CharacterListResponse, "https://swapi.dev/api/people">(
+    "https://swapi.dev/api/people",
+    async () => {
+      return HttpResponse.json([
+        "Luke Skywalker",
+        "Darth Vader",
+        "Leia Organa",
+      ]);
+    },
+  ),
+
+  http.get<
+    CharacterParams,
+    never,
+    CharacterResponse,
+    "https://swapi.dev/api/people/:id"
+  >("https://swapi.dev/api/people/:id", async ({ params }) => {
+    const { id } = params;
+    const character = {
+      id,
+      name: id === "1" ? "Luke Skywalker" : "Unknown",
+      description: id === "1" ? "A Jedi Knight" : "Unknown character",
+    };
+    return HttpResponse.json(character);
+  }),
+];
+```
+### Server setup
+MSW is configured for Node.js in `src/mocks/node.ts`:
+
+```ts
+import { setupServer } from "msw/node";
+import { handlers } from "./handlers";
+
+export const server = setupServer(...handlers);
+```
 
 ## Release Process
 
